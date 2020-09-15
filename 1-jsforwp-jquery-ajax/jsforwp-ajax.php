@@ -33,22 +33,22 @@ function jsforwp_frontend_scripts() {
   // Change the value of 'total_likes' to get_option( 'jsforwp_likes' )
   // Change the value of 'nonce' to wp_create_nonce( 'jsforwp_likes_nonce' )
   wp_localize_script(
-    'jsforwp-frontend-js',
+    'jsforwp-frontend-js', //matches the name in enqueue script
     'jsforwp_globals',
     [
-      'ajax_url'    => admin_url( 'admin-ajax.php' ),
-      'total_likes' => get_option( 'jsforwp_likes' ),
-      'nonce'       => wp_create_nonce( 'jsforwp_likes_nonce' )
+      'ajax_url'    => admin_url('admin-ajax.php'), //creats the ajax URL
+      'total_likes' => get_option('jsforwp_likes'), //not sure what this does
+      'nonce'       => wp_create_nonce('jsforwp_likes_nonce') //creates the nonce
     ]
   );
 }
-add_action( 'wp_enqueue_scripts', 'jsforwp_frontend_scripts' );
+add_action( 'wp_enqueue_scripts', 'jsforwp_frontend_scripts' ); 
 
 
 function jsforwp_add_like( ) {
 
   // Change the parameter of check_ajax_referer() to 'jsforwp_likes_nonce'
-  check_ajax_referer( 'jsforwp_likes_nonce' );
+  check_ajax_referer( 'jsforwp_likes_nonce' ); //matches the name in the create nonce
 
   $likes = intval( get_option( 'jsforwp_likes' ) );
   $new_likes = $likes + 1;

@@ -5,7 +5,7 @@
   // Change the html() value to jsforwp_globals.total_likes
   $( '.jsforwp-count' ).html( 'Total # Here' );
 
-  $('.jsforwp-like').click( function(){
+  $('.jsforwp-like').click( function(event){
 
     event.preventDefault();
 
@@ -15,17 +15,17 @@
     $.ajax({
       type : 'post',
       dataType : 'json',
-      url : 'url',
+      url : jsforwp_globals.ajax_url,
       data : {
-        action: 'data.action',
-        _ajax_nonce: 'data._ajax_nonce'
+        action: 'jsforwp_add_like',
+        _ajax_nonce: jsforwp_globals.nonce
       },
       success: function( response ) {
 
          if( 'success' == response.type ) {
 
            // Change the html() value to response.total_likes
-           $(".jsforwp-count").html( 'Total # Likes Here' );
+           $(".jsforwp-count").html( response.total_likes );
 
          }
          else {
